@@ -1,0 +1,118 @@
+getgenv().config = {
+    ["Team"] = "Pirates",
+    ["Use Race"] = {
+        ["V3"] = true,
+        ["V4"] = true
+    },
+    ["Info Screen"] = true,
+    ["White Screen"] = false,
+    ["BypassTp"] = true,
+    ["SkipFruit"] = {
+        "Portal-Portal"
+    },
+    ["Skip Race V4 User"] = true,
+    ["MainSkillToggle"] = {
+        ["Melee"] = {
+            ["Enable"] = true,
+            ["Delay"] = 1.75,
+            ["Skills"] = {
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 2.5,
+                },
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+                ["C"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+            },
+        },
+        ["Blox Fruit"] = {
+            ["Enable"] = false,
+            ["Delay"] = 2,
+            ["Skills"] = {
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 2,
+                },
+                ["C"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+                ["V"] = {
+                    ["Enable"] = false,
+                    ["HoldTime"] = 0,
+                },
+                ["F"] = {
+                    ["Enable"] = false,
+                    ["HoldTime"] = 0,
+                },
+            },
+        },
+        ["Gun"] = {
+            ["Enable"] = false,
+            ["Delay"] = 1,
+            ["Skills"] = {
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+            },
+        },
+        ["Sword"] = {
+            ["Enable"] = true,
+            ["Delay"] = 1,
+            ["Skills"] = {
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0.2,
+                },
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0.2,
+                },
+            },
+        }
+    },
+    ["Webhooks"] = {
+        ["Link Webhook"] = "",
+        ["Toggle Webhook"] = true
+    },
+    ["MinBountyHunt"] = 0,
+    ["MaxBountyHunt"] = 30000000,
+    ["SafeHealth"] = 4000
+}
+
+-- Main script logic
+while true do
+    -- Example of skill spam logic
+    if config.MainSkillToggle.Melee.Enable then
+        -- Spam skills
+        for skill, settings in pairs(config.MainSkillToggle.Melee.Skills) do
+            if settings.Enable then
+                -- Execute skill
+                print("Using skill: " .. skill)
+                wait(settings.HoldTime)
+            end
+        end
+        wait(config.MainSkillToggle.Melee.Delay)
+    end
+    -- Add additional logic for other skill sets if necessary
+
+    -- Teleport to safe location if health is low
+    if game.Players.LocalPlayer.Character.Humanoid.Health < config.SafeHealth then
+        -- Teleport to a safe location above the sea
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 1000, 0)
+    end
+end
